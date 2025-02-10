@@ -1,6 +1,8 @@
-import { FieldType, defineModelSchema } from 'soukai';
+import { FieldType } from 'soukai';
+import { defineSolidModelSchema } from 'soukai-solid';
 
-export default defineModelSchema({
+export default defineSolidModelSchema({
+    rdfsClass: 'schema:Action',
     fields: {
         name: {
             type: FieldType.String,
