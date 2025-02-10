@@ -8,7 +8,7 @@
         </li>
     </ul>
     <AGForm :form="form" class="mt-2 flex w-full" @submit="Task.create({ name: form.draft }), form.reset()">
-        <AGInput name="draft" class="w-full" />
+        <AGInput name="draft" class="w-full" aria-label="New task" />
         <AGButton submit>
             Add
         </AGButton>
