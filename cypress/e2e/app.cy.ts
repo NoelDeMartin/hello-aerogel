@@ -7,7 +7,7 @@ describe('App', () => {
         cy.solidReset();
     });
 
-    it('Shows get started link', () => {
+    it('Creates tasks', () => {
         // Arrange
         cy.intercept('PATCH', podUrl('/tasks/*')).as('createTask');
 
