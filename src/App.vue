@@ -9,11 +9,7 @@
                     {{ task.name }}
                 </li>
             </ul>
-            <AGForm
-                :form="form"
-                class="mt-2 flex w-full"
-                @submit="tasks.push({ id: tasks.length + 1, name: form.draft }), form.reset()"
-            >
+            <AGForm :form="form" class="mt-2 flex w-full" @submit="Task.create({ name: form.draft }), form.reset()">
                 <AGInput name="draft" class="w-full" />
                 <AGButton submit>
                     Add
@@ -24,12 +20,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { requiredStringInput, useForm } from '@aerogel/core';
+import { useModelCollection } from '@aerogel/plugin-soukai';
+
+import Task from './models/Task';
 
 const form = useForm({ draft: requiredStringInput() });
-const tasks = ref([
-    { id: 1, name: 'Learn aerogel' },
-    { id: 2, name: 'Learn more' },
-]);
+const tasks = useModelCollection(Task);
 </script>
