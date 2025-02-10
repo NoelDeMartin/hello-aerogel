@@ -1,12 +1,35 @@
 <template>
-    <AGAppLayout class="bg-blue-50">
-        <main class="flex flex-grow flex-col items-center justify-center">
-            <h1 class="text-4xl font-semibold">
-                {{ $t('home.title') }}
+    <AGAppLayout class="flex flex-col items-center justify-center bg-blue-50">
+        <main class="w-full max-w-prose">
+            <h1 class="w-full text-center text-4xl font-semibold">
+                Tasks
             </h1>
-            <a href="https://aerogel.js.org" target="_blank" class="mt-2 underline opacity-75 hover:opacity-100">
-                {{ $t('home.getStarted') }}
-            </a>
+            <ul v-if="tasks.length > 0" class="mt-4 border-b">
+                <li v-for="task of tasks" :key="task.id" class="border border-b-0 bg-white px-2 py-3">
+                    {{ task.name }}
+                </li>
+            </ul>
+            <AGForm
+                :form="form"
+                class="mt-2 flex w-full"
+                @submit="tasks.push({ id: tasks.length + 1, name: form.draft }), form.reset()"
+            >
+                <AGInput name="draft" class="w-full" />
+                <AGButton submit>
+                    Add
+                </AGButton>
+            </AGForm>
         </main>
     </AGAppLayout>
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+import { requiredStringInput, useForm } from '@aerogel/core';
+
+const form = useForm({ draft: requiredStringInput() });
+const tasks = ref([
+    { id: 1, name: 'Learn aerogel' },
+    { id: 2, name: 'Learn more' },
+]);
+</script>
